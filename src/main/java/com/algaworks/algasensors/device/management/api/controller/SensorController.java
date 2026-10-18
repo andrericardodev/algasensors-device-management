@@ -80,6 +80,26 @@ public class SensorController {
         sensorRepository.delete(sensor);
     }
 
+    @PutMapping("{sensorId}/enable")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void enable(@PathVariable TSID sensorId) {
+        updateEnabledStatus(sensorId, true);
+    }
+
+    @DeleteMapping("{sensorId}/enable")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void disable(@PathVariable TSID sensorId) {
+        updateEnabledStatus(sensorId, false);
+    }
+
+    private void updateEnabledStatus(TSID sensorId, boolean enabled) {
+        Sensor sensor = sensorRepository.findById(new SensorId(sensorId))
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
+        sensor.setEnabled(enabled);
+        sensorRepository.saveAndFlush(sensor);
+    }
+
     private SensorOutput converterToModel(Sensor sensor) {
         return SensorOutput.builder()
                 .id(sensor.getId().getValue())
