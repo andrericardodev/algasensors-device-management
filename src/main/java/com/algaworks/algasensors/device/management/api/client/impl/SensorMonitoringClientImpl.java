@@ -2,9 +2,7 @@ package com.algaworks.algasensors.device.management.api.client.impl;
 
 import com.algaworks.algasensors.device.management.api.client.RestClientFactory;
 import com.algaworks.algasensors.device.management.api.client.SensorMonitoringClient;
-import com.algaworks.algasensors.device.management.api.client.SensorMonitoringClientBadGatewayException;
 import io.hypersistence.tsid.TSID;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
 
